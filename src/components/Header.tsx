@@ -16,21 +16,27 @@ export default function Header() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-primary/10">
-      <div className="max-w-[100rem] mx-auto px-8 lg:px-16">
-        <div className="flex items-center justify-between h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-accent-gold/20">
+      <div className="max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className="font-heading text-3xl text-primary">Elegant Home</span>
+          <Link to="/" className="flex items-center group">
+            <motion.span 
+              className="font-heading text-4xl text-primary font-light"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              Elegant Home
+            </motion.span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-12">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-paragraph text-base transition-colors relative ${
+                className={`font-paragraph text-sm uppercase tracking-[0.1em] transition-all duration-300 relative ${
                   isActive(link.path)
                     ? 'text-accent-gold'
                     : 'text-secondary hover:text-primary'
@@ -40,8 +46,8 @@ export default function Header() {
                 {isActive(link.path) && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent-gold"
-                    transition={{ duration: 0.3 }}
+                    className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-gold to-accent-gold/0"
+                    transition={{ duration: 0.4 }}
                   />
                 )}
               </Link>
@@ -67,15 +73,15 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-background border-t border-primary/10"
+            className="md:hidden bg-background border-t border-accent-gold/20"
           >
-            <nav className="px-8 py-6 flex flex-col gap-4">
+            <nav className="px-6 py-8 flex flex-col gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-paragraph text-lg transition-colors ${
+                  className={`font-paragraph text-sm uppercase tracking-[0.1em] transition-colors ${
                     isActive(link.path)
                       ? 'text-accent-gold'
                       : 'text-secondary hover:text-primary'
