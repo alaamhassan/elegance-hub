@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Play, Filter } from 'lucide-react';
+import { Play, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -24,6 +24,16 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
   );
 };
 
+interface PortfolioImage {
+  _id: string;
+  imageFile?: string;
+  imageTitle?: string;
+  description?: string;
+  projectCategory?: string;
+  displayOrder?: number;
+  projectUrl?: string;
+}
+
 export default function PortfolioPage() {
   const [videos, setVideos] = useState<PortfolioVideos[]>([]);
   const [filteredVideos, setFilteredVideos] = useState<PortfolioVideos[]>([]);
@@ -31,6 +41,9 @@ export default function PortfolioPage() {
   const [categories, setCategories] = useState<string[]>(['All']);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState<PortfolioVideos | null>(null);
+  const [portfolioImages, setPortfolioImages] = useState<PortfolioImage[]>([]);
+  const [isLoadingImages, setIsLoadingImages] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadVideos = async () => {
@@ -50,6 +63,23 @@ export default function PortfolioPage() {
     };
 
     loadVideos();
+  }, []);
+
+  useEffect(() => {
+    const loadPortfolioImages = async () => {
+      try {
+        const result = await BaseCrudService.getAll<PortfolioImage>('portfolioimages', [], { limit: 100 });
+        // Sort by displayOrder if available
+        const sorted = result.items.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+        setPortfolioImages(sorted);
+      } catch (error) {
+        console.error('Error loading portfolio images:', error);
+      } finally {
+        setIsLoadingImages(false);
+      }
+    };
+
+    loadPortfolioImages();
   }, []);
 
   useEffect(() => {
@@ -78,6 +108,16 @@ export default function PortfolioPage() {
       return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
     }
     return url;
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 400;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
@@ -116,6 +156,82 @@ export default function PortfolioPage() {
             </FadeIn>
           </div>
         </section>
+
+        {/* Portfolio Images Gallery Section */}
+        {!isLoadingImages && portfolioImages.length > 0 && (
+          <section className="w-full bg-primary-foreground py-16 lg:py-24 border-b border-accent-gold/20">
+            <div className="max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24">
+              <FadeIn>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-1 h-8 bg-accent-gold" />
+                  <h2 className="font-heading text-2xl md:text-3xl text-primary font-light">Our Work</h2>
+                </div>
+              </FadeIn>
+              
+              <FadeIn delay={0.1}>
+                <div className="relative group">
+                  {/* Scroll Container */}
+                  <div
+                    ref={scrollContainerRef}
+                    className="flex gap-4 overflow-x-auto scroll-smooth pb-4 scrollbar-hide"
+                    style={{ scrollBehavior: 'smooth' }}
+                  >
+                    {portfolioImages.map((image, index) => (
+                      <motion.div
+                        key={image._id}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                        className="flex-shrink-0 w-64 h-48 group/item cursor-pointer"
+                      >
+                        <div className="relative overflow-hidden h-full bg-secondary rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                          {image.imageFile && (
+                            <Image
+                              src={image.imageFile}
+                              alt={image.imageTitle || 'Portfolio work'}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover/item:scale-110"
+                            />
+                          )}
+                          <div className="absolute inset-0 bg-primary/0 group-hover/item:bg-primary/50 transition-colors duration-300 flex flex-col items-center justify-center opacity-0 group-hover/item:opacity-100">
+                            <div className="text-center px-4">
+                              <h3 className="font-heading text-lg text-primary-foreground font-light mb-2 line-clamp-2">
+                                {image.imageTitle}
+                              </h3>
+                              {image.projectCategory && (
+                                <p className="font-paragraph text-xs text-accent-gold uppercase tracking-[0.1em]">
+                                  {image.projectCategory}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Navigation Buttons */}
+                  <motion.button
+                    onClick={() => scroll('left')}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-10 bg-primary text-primary-foreground p-3 rounded-full shadow-lg hover:bg-accent-gold hover:text-primary transition-colors duration-300 opacity-0 group-hover:opacity-100"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </motion.button>
+                  
+                  <motion.button
+                    onClick={() => scroll('right')}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-10 bg-primary text-primary-foreground p-3 rounded-full shadow-lg hover:bg-accent-gold hover:text-primary transition-colors duration-300 opacity-0 group-hover:opacity-100"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </motion.button>
+                </div>
+              </FadeIn>
+            </div>
+          </section>
+        )}
 
         {/* Filter Section */}
         <section className="w-full bg-background py-16 lg:py-24 border-b border-accent-gold/20">

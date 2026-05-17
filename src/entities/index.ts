@@ -50,6 +50,29 @@ export interface ContactInquiries {
 
 
 /**
+ * Collection ID: portfolioimages
+ * Interface for PortfolioImages
+ */
+export interface PortfolioImages {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType image - Contains image URL, render with <Image> component, NOT as text */
+  imageFile?: string;
+  /** @wixFieldType text */
+  imageTitle?: string;
+  /** @wixFieldType text */
+  description?: string;
+  /** @wixFieldType text */
+  projectCategory?: string;
+  /** @wixFieldType number */
+  displayOrder?: number;
+  /** @wixFieldType url */
+  projectUrl?: string;
+}
+
+
+/**
  * Collection ID: portfoliovideos
  * Interface for PortfolioVideos
  */
