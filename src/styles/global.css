@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* RTL Support */
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
 /* Hide scrollbar while keeping functionality */
 .scrollbar-hide {
   -ms-overflow-style: none;

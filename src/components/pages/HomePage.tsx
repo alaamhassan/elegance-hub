@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Home, Wrench, ChevronRight } from 'lucide-react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Image } from '@/components/ui/image';
+import { useTranslation } from '@/lib/useTranslation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -61,6 +62,7 @@ export default function HomePage() {
   });
   const heroY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
   const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0]);
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent-gold selection:text-primary-foreground">
@@ -111,13 +113,12 @@ export default function HomePage() {
                     animate={{ opacity: [0.6, 1, 0.6] }}
                     transition={{ duration: 4, repeat: Infinity }}
                   >
-                    ✦ Welcome to Elegant Home ✦
+                    ✦ {t('homeHero')} ✦
                   </motion.span>
                 </FadeIn>
                 <FadeIn delay={0.2}>
                   <h1 className="font-heading text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] text-primary leading-[0.9] tracking-tighter mb-10 text-balance font-light">
-                    Curating Spaces of <br className="hidden md:block" />
-                    <span className="italic font-extralight text-accent-gold">Timeless Elegance</span>
+                    {t('homeHeroSubtitle')}
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.4}>
@@ -131,7 +132,7 @@ export default function HomePage() {
                     className="group relative inline-flex items-center justify-center bg-primary text-primary-foreground px-10 py-5 font-paragraph text-xs uppercase tracking-[0.15em] overflow-hidden transition-all duration-500 hover:bg-accent-gold hover:shadow-lg"
                   >
                     <span className="relative z-10 flex items-center gap-3">
-                      Explore Services
+                      {t('exploreServices')}
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                     </span>
                   </Link>
@@ -139,7 +140,7 @@ export default function HomePage() {
                     to="/contact"
                     className="group inline-flex items-center justify-center text-primary font-paragraph text-xs uppercase tracking-[0.15em] pb-2 border-b-2 border-primary/40 hover:border-accent-gold transition-all duration-300"
                   >
-                    Get in Touch
+                    {t('getInTouch')}
                   </Link>
                 </FadeIn>
               </div>

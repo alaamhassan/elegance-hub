@@ -1,6 +1,8 @@
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
+import { useLanguageStore } from '@/lib/languageStore';
+import { useEffect } from 'react';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import HomePage from '@/components/pages/HomePage';
 import ServicesPage from '@/components/pages/ServicesPage';
@@ -12,6 +14,14 @@ import TestimonialsPage from '@/components/pages/TestimonialsPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
+  const language = useLanguageStore((state) => state.language);
+
+  useEffect(() => {
+    // Set document direction and language on mount and when language changes
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = language;
+  }, [language]);
+
   return (
     <>
       <ScrollToTop />
