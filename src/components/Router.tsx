@@ -6,6 +6,9 @@ import HomePage from '@/components/pages/HomePage';
 import ServicesPage from '@/components/pages/ServicesPage';
 import ServiceDetailPage from '@/components/pages/ServiceDetailPage';
 import ContactPage from '@/components/pages/ContactPage';
+import PortfolioPage from '@/components/pages/PortfolioPage';
+import TeamPage from '@/components/pages/TeamPage';
+import TestimonialsPage from '@/components/pages/TestimonialsPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -49,6 +52,27 @@ const router = createBrowserRouter([
         element: <ContactPage />,
         routeMetadata: {
           pageIdentifier: 'contact',
+        },
+      },
+      {
+        path: "portfolio",
+        element: <PortfolioPage />,
+        routeMetadata: {
+          pageIdentifier: 'portfolio',
+        },
+      },
+      {
+        path: "team",
+        element: <TeamPage />,
+        routeMetadata: {
+          pageIdentifier: 'team',
+        },
+      },
+      {
+        path: "testimonials",
+        element: <TestimonialsPage />,
+        routeMetadata: {
+          pageIdentifier: 'testimonials',
         },
       },
       {

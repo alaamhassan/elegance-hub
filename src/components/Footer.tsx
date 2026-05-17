@@ -31,6 +31,24 @@ export default function Footer() {
                 Services
               </Link>
               <Link
+                to="/portfolio"
+                className="font-paragraph text-sm opacity-90 hover:opacity-100 hover:text-accent-gold transition-all"
+              >
+                Portfolio
+              </Link>
+              <Link
+                to="/team"
+                className="font-paragraph text-sm opacity-90 hover:opacity-100 hover:text-accent-gold transition-all"
+              >
+                Team
+              </Link>
+              <Link
+                to="/testimonials"
+                className="font-paragraph text-sm opacity-90 hover:opacity-100 hover:text-accent-gold transition-all"
+              >
+                Testimonials
+              </Link>
+              <Link
                 to="/contact"
                 className="font-paragraph text-sm opacity-90 hover:opacity-100 hover:text-accent-gold transition-all"
               >

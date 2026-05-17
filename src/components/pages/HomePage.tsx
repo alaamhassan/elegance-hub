@@ -478,7 +478,40 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 6. CALL TO ACTION - The Final Invitation */}
+        {/* 6. PORTFOLIO PREVIEW - Showcase Videos */}
+        <section className="w-full bg-primary-foreground py-40 lg:py-56 relative overflow-hidden">
+          <div className="max-w-[120rem] mx-auto px-6 md:px-12 lg:px-24">
+            <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start mb-24">
+              <div className="lg:w-1/3">
+                <FadeIn>
+                  <motion.span 
+                    className="block font-paragraph text-xs uppercase tracking-[0.3em] text-accent-gold mb-6 font-light"
+                    animate={{ opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    ✦ Visual Excellence ✦
+                  </motion.span>
+                  <h2 className="font-heading text-6xl lg:text-7xl text-primary mb-8 leading-tight font-light">
+                    Portfolio <br />
+                    <span className="italic font-extralight text-accent-gold">Videos</span>
+                  </h2>
+                  <p className="font-paragraph text-secondary text-lg leading-relaxed mb-10 font-light">
+                    Explore our curated collection of interior design transformations that showcase the artistry and precision defining Elegant Home.
+                  </p>
+                  <Link
+                    to="/portfolio"
+                    className="inline-flex items-center font-paragraph text-xs uppercase tracking-[0.15em] text-primary hover:text-accent-gold transition-all duration-300 group/link pb-2 border-b border-primary/30 hover:border-accent-gold"
+                  >
+                    View Full Portfolio
+                    <ChevronRight className="ml-3 w-4 h-4 transition-transform group-hover/link:translate-x-1" />
+                  </Link>
+                </FadeIn>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. CALL TO ACTION - The Final Invitation */}
         <section className="w-full bg-background py-40 lg:py-56 relative overflow-hidden">
           {/* Animated decorative elements */}
           <motion.div 
