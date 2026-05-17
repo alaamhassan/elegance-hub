@@ -65,7 +65,9 @@ export default function Header() {
             <div className="relative">
               <button
                 onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-                className="flex items-center gap-2 font-paragraph text-sm uppercase tracking-[0.1em] text-secondary hover:text-primary transition-colors p-2"
+                className={`flex items-center gap-2 font-paragraph uppercase tracking-[0.1em] text-secondary hover:text-primary transition-colors p-2 ${
+                  language === 'ar' ? 'text-base' : 'text-sm'
+                }`}
                 aria-label={t('language')}
               >
                 <Globe className="h-4 w-4" />
@@ -98,7 +100,7 @@ export default function Header() {
                         setLanguage('ar');
                         setLanguageMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-4 py-2 font-paragraph text-sm transition-colors border-t border-accent-gold/20 ${
+                      className={`block w-full text-left px-4 py-2 font-paragraph text-base transition-colors border-t border-accent-gold/20 ${
                         language === 'ar'
                           ? 'text-accent-gold bg-primary/5'
                           : 'text-secondary hover:text-primary'
@@ -150,7 +152,7 @@ export default function Header() {
                         setLanguage('ar');
                         setLanguageMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-4 py-2 font-paragraph text-sm transition-colors border-t border-accent-gold/20 ${
+                      className={`block w-full text-left px-4 py-2 font-paragraph text-base transition-colors border-t border-accent-gold/20 ${
                         language === 'ar'
                           ? 'text-accent-gold bg-primary/5'
                           : 'text-secondary hover:text-primary'
