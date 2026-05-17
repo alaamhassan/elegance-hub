@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { Image } from '@/components/ui/image';
+import { useTranslation } from '@/lib/useTranslation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BaseCrudService } from '@/integrations';
@@ -25,6 +26,7 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
 };
 
 export default function TestimonialsPage() {
+  const { language } = useTranslation();
   const [testimonials, setTestimonials] = useState<ClientTestimonials[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -85,13 +87,13 @@ export default function TestimonialsPage() {
               </motion.span>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h1 className="font-heading text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 font-light">
+              <h1 className={`font-heading leading-tight mb-8 font-light ${language === 'ar' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-6xl md:text-7xl lg:text-8xl'}`}>
                 Testimonials & <br />
                 <span className="italic font-extralight text-accent-gold">Success Stories</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.4}>
-              <p className="font-paragraph text-lg md:text-xl max-w-2xl leading-relaxed font-light opacity-90">
+              <p className={`font-paragraph max-w-2xl leading-relaxed font-light opacity-90 ${language === 'ar' ? 'text-base md:text-lg' : 'text-lg md:text-xl'}`}>
                 Hear from our satisfied clients about their transformative experiences with Elegant Home.
               </p>
             </FadeIn>

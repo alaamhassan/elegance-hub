@@ -5,10 +5,12 @@ import { ArrowRight } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
 import { Services } from '@/entities';
 import { Image } from '@/components/ui/image';
+import { useTranslation } from '@/lib/useTranslation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function ServicesPage() {
+  const { t, language } = useTranslation();
   const [services, setServices] = useState<Services[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -46,10 +48,10 @@ export default function ServicesPage() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-4xl mx-auto"
         >
-          <h1 className="font-heading text-6xl lg:text-7xl text-primary mb-6">
-            Our Services
+          <h1 className={`font-heading text-primary mb-6 ${language === 'ar' ? 'text-4xl lg:text-5xl' : 'text-6xl lg:text-7xl'}`}>
+            {t('allServices')}
           </h1>
-          <p className="font-paragraph text-lg text-secondary leading-relaxed">
+          <p className={`font-paragraph text-secondary leading-relaxed ${language === 'ar' ? 'text-base' : 'text-lg'}`}>
             Discover our comprehensive range of interior design and home appliances services, each crafted to elevate your living experience with sophistication and care.
           </p>
         </motion.div>

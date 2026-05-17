@@ -30,11 +30,11 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <motion.span 
-              className="font-heading text-4xl text-primary font-light"
+              className={`font-heading text-primary font-light ${language === 'ar' ? 'text-2xl' : 'text-4xl'}`}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              Elegant Home
+              {language === 'ar' ? 'إليجانت هوم' : 'Elegant Home'}
             </motion.span>
           </Link>
 
@@ -44,7 +44,7 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`font-paragraph text-sm uppercase tracking-[0.1em] transition-all duration-300 relative ${
+                className={`font-paragraph ${language === 'ar' ? 'text-xs' : 'text-sm'} uppercase tracking-[0.1em] transition-all duration-300 relative ${
                   isActive(link.path)
                     ? 'text-accent-gold'
                     : 'text-secondary hover:text-primary'
@@ -66,7 +66,7 @@ export default function Header() {
               <button
                 onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
                 className={`flex items-center gap-2 font-paragraph uppercase tracking-[0.1em] text-secondary hover:text-primary transition-colors p-2 ${
-                  language === 'ar' ? 'text-base' : 'text-sm'
+                  language === 'ar' ? 'text-xs' : 'text-sm'
                 }`}
                 aria-label={t('language')}
               >
@@ -100,7 +100,7 @@ export default function Header() {
                         setLanguage('ar');
                         setLanguageMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-4 py-2 font-paragraph text-base transition-colors border-t border-accent-gold/20 ${
+                      className={`block w-full text-left px-4 py-2 font-paragraph text-xs transition-colors border-t border-accent-gold/20 ${
                         language === 'ar'
                           ? 'text-accent-gold bg-primary/5'
                           : 'text-secondary hover:text-primary'
@@ -152,7 +152,7 @@ export default function Header() {
                         setLanguage('ar');
                         setLanguageMenuOpen(false);
                       }}
-                      className={`block w-full text-left px-4 py-2 font-paragraph text-base transition-colors border-t border-accent-gold/20 ${
+                      className={`block w-full text-left px-4 py-2 font-paragraph text-xs transition-colors border-t border-accent-gold/20 ${
                         language === 'ar'
                           ? 'text-accent-gold bg-primary/5'
                           : 'text-secondary hover:text-primary'
@@ -192,7 +192,7 @@ export default function Header() {
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`font-paragraph text-sm uppercase tracking-[0.1em] transition-colors ${
+                  className={`font-paragraph ${language === 'ar' ? 'text-xs' : 'text-sm'} uppercase tracking-[0.1em] transition-colors ${
                     isActive(link.path)
                       ? 'text-accent-gold'
                       : 'text-secondary hover:text-primary'

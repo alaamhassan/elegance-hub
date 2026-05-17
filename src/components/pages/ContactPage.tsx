@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
 import { ContactInquiries } from '@/entities';
+import { useTranslation } from '@/lib/useTranslation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function ContactPage() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     customerName: '',
     email: '',
@@ -71,11 +73,11 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-4xl mx-auto"
         >
-          <h1 className="font-heading text-6xl lg:text-7xl text-primary mb-6">
-            Get in Touch
+          <h1 className={`font-heading text-6xl lg:text-7xl text-primary mb-6 ${t('contactUs') === 'اتصل بنا' ? 'text-4xl lg:text-5xl' : ''}`}>
+            {t('contactUs')}
           </h1>
-          <p className="font-paragraph text-lg text-secondary leading-relaxed">
-            We'd love to hear about your project. Reach out to us and let's create something extraordinary together.
+          <p className={`font-paragraph text-lg text-secondary leading-relaxed ${t('contactDescription') === 'تواصل معنا اليوم' ? 'text-base' : ''}`}>
+            {t('contactDescription')}
           </p>
         </motion.div>
       </section>

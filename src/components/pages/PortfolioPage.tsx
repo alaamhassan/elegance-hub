@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Play, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Image } from '@/components/ui/image';
+import { useTranslation } from '@/lib/useTranslation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BaseCrudService } from '@/integrations';
@@ -35,6 +36,7 @@ interface PortfolioImage {
 }
 
 export default function PortfolioPage() {
+  const { language } = useTranslation();
   const [videos, setVideos] = useState<PortfolioVideos[]>([]);
   const [filteredVideos, setFilteredVideos] = useState<PortfolioVideos[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -144,7 +146,7 @@ export default function PortfolioPage() {
               </motion.span>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <h1 className="font-heading text-6xl md:text-7xl lg:text-8xl leading-tight mb-8 font-light">
+              <h1 className={`font-heading leading-tight mb-8 font-light ${language === 'ar' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-6xl md:text-7xl lg:text-8xl'}`}>
                 Portfolio <br />
                 <span className="italic font-extralight text-accent-gold">Videos</span>
               </h1>

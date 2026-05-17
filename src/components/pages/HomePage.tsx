@@ -62,7 +62,7 @@ export default function HomePage() {
   });
   const heroY = useTransform(heroScroll, [0, 1], ["0%", "40%"]);
   const heroOpacity = useTransform(heroScroll, [0, 1], [1, 0]);
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent-gold selection:text-primary-foreground">
@@ -117,12 +117,12 @@ export default function HomePage() {
                   </motion.span>
                 </FadeIn>
                 <FadeIn delay={0.2}>
-                  <h1 className="font-heading text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] text-primary leading-[0.9] tracking-tighter mb-10 text-balance font-light">
+                  <h1 className={`font-heading text-primary leading-[0.9] tracking-tighter mb-10 text-balance font-light ${language === 'ar' ? 'text-4xl md:text-5xl lg:text-6xl' : 'text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem]'}`}>
                     {t('homeHeroSubtitle')}
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.4}>
-                  <p className="font-paragraph text-lg md:text-xl text-secondary max-w-2xl leading-relaxed mb-14 font-light">
+                  <p className={`font-paragraph text-secondary max-w-2xl leading-relaxed mb-14 font-light ${language === 'ar' ? 'text-base md:text-lg' : 'text-lg md:text-xl'}`}>
                     Elegant Home transforms your vision into reality through bespoke interior design and premium home appliances. We craft sanctuaries that reflect your refined taste and elevate everyday living.
                   </p>
                 </FadeIn>
