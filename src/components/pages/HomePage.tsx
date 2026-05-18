@@ -95,7 +95,7 @@ export default function HomePage() {
             <motion.div style={{ y: heroY, opacity: heroOpacity }} className="w-full h-full">
               <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/40 to-background/60 z-10" />
               <Image
-                src="https://static.wixstatic.com/media/6de235_48ab531acd144e9286277031b26a14f8~mv2.png?originWidth=1280&originHeight=704"
+                src="https://static.wixstatic.com/media/6de235_71d629e31bb24df4ad24bd0f7a927206~mv2.jpg"
                 alt="Elegant luxury interior design showcase"
                 className="w-full h-full object-cover opacity-30"
               />
